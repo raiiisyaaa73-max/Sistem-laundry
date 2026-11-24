@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumen Laporan Pengumpulan Proyek ASAS XII - Nadia Miranti</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #f8fafc;
+            padding: 2rem 1rem;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+        h1, h2, h3, h4 {
+            color: #0f172a;
+        }
+        h1 {
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 0.4rem;
+            margin-top: 2rem;
+            color: #1e40af;
+        }
+        .info-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .info-box table td {
+            padding: 4px 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+        code {
+            background-color: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 0.88em;
+            color: #0f172a;
+        }
+        pre {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+        .ss-placeholder {
+            border: 2px dashed #94a3b8;
+            background-color: #f8fafc;
+            padding: 2rem;
+            text-align: center;
+            color: #64748b;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-admin { background-color: #fee2e2; color: #991b1b; }
+        .badge-kasir { background-color: #e0f2fe; color: #075985; }
+        .no-print {
+            margin-bottom: 1.5rem;
+        }
+        .btn-print {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+        <span style="color: #64748b; font-size: 0.9rem;">Dokumen ini siap dicetak / disimpan ke PDF atau disalin ke Google Docs.</span>
+        <button class="btn-print" onclick="window.print()">Simpan / Cetak ke PDF</button>
+    </div>
+
+    <h1>DOKUMEN PENGUMPULAN PROYEK ASAS XII</h1>
+    <h3 style="color: #475569; margin-top: -0.5rem; font-weight: 500;">Sistem Informasi Manajemen Laundry Berbasis Web (SIM Laundry)</h3>
+
+    <!-- Identitas Siswa -->
+    <div class="info-box">
+        <h4 style="margin-top: 0; margin-bottom: 0.5rem; color: #1e3a8a;">Data Identitas Peserta Didik:</h4>
+        <table>
+            <tr>
+                <td style="width: 180px; font-weight: 600;">Nama Lengkap</td>
+                <td>: <strong>Nadia Miranti</strong></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Kelas</td>
+                <td>: <strong>XII RPL 1 / XII RPL 2</strong> (Sesuaikan dengan kelas Anda)</td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Link GitHub Repository</td>
+                <td>: <code>https://github.com/Nadia-miranti/Luxury</code></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Teknologi</td>
+                <td>: Laravel (PHP 8.5, MySQL), Bootstrap 5, JavaScript</td>
+            </tr>
+        </table>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
+
+    <!-- ================= BAGIAN 1 ================= -->
+    <h2>BAGIAN 1: PENJELASAN DATABASE & MIGRATION</h2>
+    <p>Aplikasi SIM Laundry menggunakan basis data MySQL bernama <code>db_laundry</code> yang terdiri atas 3 tabel utama yang saling terhubung menggunakan relasi Eloquent dan Foreign Key.</p>
+
+    <h3>1. Tabel <code>users</code></h3>
+    <p><strong>File Migration:</strong> <code>database/migrations/0001_01_01_000000_create_users_table.php</code></p>
+    <p>Digunakan untuk menyimpan kredensial pengguna yang dapat login ke dalam sistem, dilengkapi dengan kolom pembeda hak akses:</p>
+    <ul>
+        <li><code>id</code> (BigInteger, Primary Key, Auto Increment)</li>
+        <li><code>name</code> (String, Nama lengkap pengguna)</li>
+        <li><code>email</code> (String, Unique, Alamat email login)</li>
+        <li><code>password</code> (String, Hash Bcrypt sandi pengguna)</li>
+        <li><code>role</code> (Enum: <code>'admin'</code>, <code>'kasir'</code>, default: <code>'kasir'</code>): Membedakan hak akses halaman & fitur.</li>
+        <li><code>timestamps</code> (<code>created_at</code> & <code>updated_at</code>)</li>
+    </ul>
+
+    <h3>2. Tabel <code>layanans</code></h3>
+    <p><strong>File Migration:</strong> <code>database/migrations/2026_11_24_052329_create_layanans_table.php</code></p>
+    <p>Menyimpan data paket jenis pencucian laundry yang ditawarkan kepada pelanggan:</p>
+    <ul>
+        <li><code>id</code> (BigInteger, Primary Key, Auto Increment)</li>
+        <li><code>nama_layanan</code> (String, Nama jenis layanan, contoh: Reguler, Ekspres, Superkilat)</li>
+        <li><code>harga_per_kg</code> (Integer, Biaya per kilogram dalam rupiah)</li>
+        <li><code>estimasi_waktu</code> (String, Estimasi durasi pengerjaan, contoh: 3-4 hari, 5 jam)</li>
+        <li><code>timestamps</code></li>
+    </ul>
+
+    <h3>3. Tabel <code>transaksis</code></h3>
+    <p><strong>File Migration:</strong> <code>database/migrations/2026_11_24_052339_create_transaksis_table.php</code></p>
+    <p>Menyimpan seluruh data penerimaan pesanan cucian pelanggan yang berelasi dengan tabel <code>layanans</code>:</p>
+    <ul>
+        <li><code>id</code> (BigInteger, Primary Key, Auto Increment)</li>
+        <li><code>layanan_id</code> (ForeignId): Terhubung ke <code>layanans(id)</code> dengan atribut <code>onDelete('cascade')</code> agar jika layanan dihapus, data transaksi terkait terjaga integritasnya.</li>
+        <li><code>nama_pelanggan</code> (String, Nama konsumen pemilik cucian)</li>
+        <li><code>no_hp</code> (String, Kontak WhatsApp/telepon pelanggan)</li>
+        <li><code>berat</code> (Decimal 8,2, Berat timbangan cucian dalam kilogram)</li>
+        <li><code>total_harga</code> (Integer, Total biaya yang dihitung: <code>berat * harga_per_kg</code>)</li>
+        <li><code>status</code> (Enum: <code>'Proses'</code>, <code>'Selesai'</code>, default: <code>'Proses'</code>): Status pengerjaan laundry.</li>
+        <li><code>timestamps</code></li>
+    </ul>
+
+    <div class="ss-placeholder">
+        [TEMPAT MENEMPELKAN SCREENSHOT: File Migration atau Struktur phpMyAdmin tabel users, layanans, dan transaksis]
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
+
+    <!-- ================= BAGIAN 2 ================= -->
+    <h2>BAGIAN 2: LOGIN & REGISTER SERTA PERBEDAAN ROLE</h2>
+
+    <h3>1. Perbedaan Hak Akses Role Admin vs Kasir</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Fitur / Modul Aplikasi</th>
+                <th>Role Administrator <span class="badge badge-admin">ADMIN</span></th>
+                <th>Role Kasir <span class="badge badge-kasir">KASIR</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Akses Dashboard</strong></td>
+                <td>Melihat statistik lengkap & transaksi terbaru</td>
+                <td>Melihat statistik lengkap & transaksi terbaru</td>
+            </tr>
+            <tr>
+                <td><strong>Daftar Layanan Cuci</strong></td>
+                <td>Bisa melihat seluruh paket layanan</td>
+                <td>Bisa melihat seluruh paket layanan (Read-Only)</td>
+            </tr>
+            <tr>
+                <td><strong>CRUD Data Layanan</strong></td>
+                <td><strong>Penuh (Tambah, Edit, Hapus Layanan)</strong></td>
+                <td><strong>Tidak Diizinkan</strong> (Tombol aksi disembunyikan & diproteksi middleware)</td>
+            </tr>
+            <tr>
+                <td><strong>Pencatatan Transaksi Baru</strong></td>
+                <td>Bisa mencatat cucian pelanggan baru</td>
+                <td>Bisa mencatat cucian pelanggan baru</td>
+            </tr>
+            <tr>
+                <td><strong>Update Status Pengerjaan</strong></td>
+                <td>Bisa mengubah status (Proses &rarr; Selesai)</td>
+                <td>Bisa mengubah status (Proses &rarr; Selesai)</td>
+            </tr>
+            <tr>
+                <td><strong>Cetak Struk / Nota</strong></td>
+                <td>Bisa mencetak nota transaksi pelanggan</td>
+                <td>Bisa mencetak nota transaksi pelanggan</td>
+            </tr>
+            <tr>
+                <td><strong>Hapus Data Transaksi</strong></td>
+                <td><strong>Diizinkan</strong> (Fitur admin)</td>
+                <td><strong>Tidak Diizinkan</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Menu Laporan Keuangan</strong></td>
+                <td><strong>Akses Penuh</strong> (Rekap omzet & performa layanan)</td>
+                <td><strong>Tidak Diizinkan</strong> (Menu tidak ditampilkan)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. Kredensial Akun Default Pengujian:</h3>
+    <ul>
+        <li><strong>Admin:</strong> <code>admin@laundry.com</code> (atau <code>admin@gmail.com</code>) | Password: <code>password</code></li>
+        <li><strong>Kasir:</strong> <code>kasir@laundry.com</code> (atau <code>kasir@gmail.com</code>) | Password: <code>password</code></li>
+    </ul>
+
+    <h3>3. Screenshot Halaman Login & Register:</h3>
+    <div class="ss-placeholder">
+        [SCREENSHOT 1: Halaman Login - Ukuran Desktop (1280px)]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 2: Halaman Login - Ukuran Layar Tablet (768px)]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 3: Halaman Login - Ukuran Layar HP (375px)]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 4: Halaman Register Akun - Ukuran Layar Desktop, Tab, dan HP]
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
+
+    <!-- ================= BAGIAN 3 ================= -->
+    <h2>BAGIAN 3: CRUD DATA LAYANAN</h2>
+    <p>Fitur CRUD Layanan memungkinkan Administrator mengelola daftar tarif dan paket laundry secara dinamis.</p>
+
+    <h3>Data Layanan Wajib yang Disediakan:</h3>
+    <ol>
+        <li><strong>Reguler:</strong> Rp 7.000 / kg | Estimasi Waktu: 3-4 hari</li>
+        <li><strong>Ekspres:</strong> Rp 12.000 / kg | Estimasi Waktu: 1-2 hari</li>
+        <li><strong>Superkilat:</strong> Rp 25.000 / kg | Estimasi Waktu: 5 jam selesai</li>
+    </ol>
+
+    <h3>Fungsionalitas:</h3>
+    <ul>
+        <li><strong>Create:</strong> Form modal untuk menambah paket layanan baru dengan validasi nama unik dan harga minimal.</li>
+        <li><strong>Read:</strong> Tabel daftar layanan berformat mata uang Rupiah (contoh: <code>Rp 7.000</code>) dan jumlah transaksi yang menggunakan layanan tersebut.</li>
+        <li><strong>Update:</strong> Halaman edit untuk memperbarui nama, tarif per kg, atau durasi estimasi pengerjaan.</li>
+        <li><strong>Delete:</strong> Menghapus paket layanan dengan modal/dialog konfirmasi keamanan.</li>
+    </ul>
+
+    <div class="ss-placeholder">
+        [SCREENSHOT 1: Tabel CRUD Layanan - Ukuran Layar Desktop]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 2: Modal Tambah / Form Edit Layanan - Ukuran Layar Tablet]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 3: Tampilan Data Layanan Responsif - Ukuran Layar HP]
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
+
+    <!-- ================= BAGIAN 4 ================= -->
+    <h2>BAGIAN 4: ORDER & REKAP ORDER TRANSAKSI</h2>
+
+    <h3>1. Form Pencatatan Transaksi (Order Baru):</h3>
+    <ul>
+        <li><strong>Input:</strong> Nama Pelanggan, Nomor HP/WhatsApp, Pilihan Jenis Layanan, dan Berat Timbangan Cucian (kg).</li>
+        <li><strong>Logika Perhitungan Otomatis:</strong> Menggunakan rumus <code>total_harga = berat * harga_per_kg</code>. Total harga terkalkulasi secara langsung (*live preview*) di frontend saat kasir mengetik berat cucian dan divalidasi ulang di backend controller.</li>
+    </ul>
+
+    <h3>2. Tabel Rekap Transaksi Laundry:</h3>
+    <ul>
+        <li>Menampilkan nomor nota (contoh: <code>#0001</code>), tanggal penerimaan, nama pelanggan, kontak WhatsApp, paket layanan, berat, dan total tarif.</li>
+        <li><strong>Badge Status Warna:</strong>
+            <ul>
+                <li>Status <code>Proses</code>: Kuning / Amber (Menandakan cucian sedang dicuci/disetrika).</li>
+                <li>Status <code>Selesai</code>: Hijau / Success (Menandakan cucian siap diambil pelanggan).</li>
+            </ul>
+        </li>
+        <li><strong>Aksi Cepat Status:</strong> Tombol 1-klik untuk langsung mengubah status pengerjaan dari <em>Proses</em> menjadi <em>Selesai</em>.</li>
+        <li><strong>Filter & Pencarian:</strong> Menyaring data berdasarkan status pengerjaan, paket layanan, rentang tanggal, dan kata kunci nama/HP.</li>
+        <li><strong>Fitur Cetak Nota & Laporan:</strong> Fitur print struk kasir (*thermal receipt*) dan cetak rekap laporan transaksi (dukungan fungsi <code>window.print()</code>).</li>
+    </ul>
+
+    <div class="ss-placeholder">
+        [SCREENSHOT 1: Formulir Transaksi Baru dengan Live Hitung Tarif - Ukuran Layar Desktop]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 2: Tabel Rekap Transaksi & Filter - Ukuran Layar Tablet]
+    </div>
+    <div class="ss-placeholder">
+        [SCREENSHOT 3: Cetak Nota Struk Kasir & Tampilan di Layar HP]
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0;">
+
+    <!-- ================= BAGIAN 5 ================= -->
+    <h2>BAGIAN 5: LOG PENGGUNAAN AI (AI PROMPTING LOG)</h2>
+    <p>Tabel bukti kolaborasi peserta didik dengan kecerdasan buatan (AI) selama proses perancangan dan pembangunan aplikasi SIM Laundry:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35px; text-align: center;">No.</th>
+                <th style="width: 140px;">Tahap Pengembangan</th>
+                <th style="width: 220px;">Tujuan / Masalah yang Diselesaikan</th>
+                <th>Ringkasan Prompt ke AI</th>
+                <th>Penyesuaian Manual yang Dilakukan Siswa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><strong>1</strong></td>
+                <td><strong>Konfigurasi Database & Migration</strong></td>
+                <td>Menyesuaikan koneksi database MySQL <code>db_laundry</code> serta membuat skema migrasi tabel users (role admin & kasir), layanans, dan transaksis dengan relasi foreign key cascade.</td>
+                <td><em>"Konfigurasikan database MySQL db_laundry dan buat skema migrasi tabel users (enum role admin/kasir), layanans, dan transaksis dengan foreignId onDelete cascade."</em></td>
+                <td>Memeriksa file <code>.env</code> untuk memastikan nama database sesuai dan mengecek tipe data decimal pada kolom berat cucian.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>2</strong></td>
+                <td><strong>Model & Relasi Eloquent</strong></td>
+                <td>Membangun relasi One-to-Many antara model <code>Layanan</code> (hasMany) dan <code>Transaksi</code> (belongsTo) serta menambahkan method helper format Rupiah.</td>
+                <td><em>"Buat model Eloquent Layanan dan Transaksi lengkap dengan relasi hasMany dan belongsTo serta helper format mata uang Rupiah."</em></td>
+                <td>Menambahkan helper <code>getStatusBadgeAttribute</code> pada model Transaksi agar warna badge status tampil otomatis di view.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>3</strong></td>
+                <td><strong>Seeder Data Awal</strong></td>
+                <td>Membuat seeder untuk pengguna default (Admin & Kasir) serta 3 layanan wajib (Reguler 7k, Ekspres 12k, Superkilat 25k).</td>
+                <td><em>"Buat Seeder untuk akun pengguna default Admin dan Kasir serta 3 data layanan: Reguler, Ekspres, dan Superkilat, lalu jalankan php artisan migrate:fresh --seed."</em></td>
+                <td>Menambahkan akun alias <code>admin@gmail.com</code> dan <code>kasir@gmail.com</code> agar fleksibel saat pengujian di sekolah.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>4</strong></td>
+                <td><strong>Autentikasi & Hak Akses (Role)</strong></td>
+                <td>Membangun sistem login/logout manual dan custom middleware untuk membedakan hak akses Administrator dan Kasir.</td>
+                <td><em>"Buatkan AuthController untuk login/logout dan Middleware untuk membatasi hak akses role admin (akses penuh) dan role kasir (transaksi & read-only layanan)."</em></td>
+                <td>Mendaftarkan alias middleware <code>'admin'</code> dan <code>'role'</code> pada konfigurasi <code>bootstrap/app.php</code>.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>5</strong></td>
+                <td><strong>UI/UX Sederhana & Kalkulator Real-time</strong></td>
+                <td>Merancang tampilan antarmuka standar Bootstrap 5 yang bersih (navbar atas, card statistik, tabel bergaris, dan form dengan live kalkulasi tarif otomatis).</td>
+                <td><em>"Buat tampilan antarmuka yang sederhana menggunakan Bootstrap 5 murni dengan navbar atas, kartu ringkasan, live hitung total harga otomatis (berat * tarif/kg), dan fitur cetak nota laundry."</em></td>
+                <td>Menyederhanakan desain agar tidak menggunakan CSS berlebihan sehingga terlihat natural seperti proyek siswa kejuruan.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>6</strong></td>
+                <td><strong>Pengujian & Registrasi Akun</strong></td>
+                <td>Membuat automated feature test PHPUnit untuk memverifikasi logika tarif, hak akses role, serta menambahkan halaman registrasi akun.</td>
+                <td><em>"Tambahkan rute dan view register akun baru dan buat rangkaian Feature Test PHPUnit untuk memverifikasi login, CRUD layanan, dan alur transaksi."</em></td>
+                <td>Menjalankan perintah <code>php artisan test</code> (10/10 test passed) dan memformat kode menggunakan Laravel Pint.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #cbd5e1; display: flex; justify-content: space-between;">
+        <div>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">Dokumen Proyek Penilaian Akhir Semester (ASAS XII)</p>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">SMK Kompetensi Keahlian Rekayasa Perangkat Lunak (RPL)</p>
+        </div>
+        <div style="text-align: right;">
+            <p style="font-weight: 600; margin: 0;">Nadia Miranti</p>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">Pengembang Aplikasi</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
